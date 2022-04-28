@@ -34,6 +34,4 @@ def markerJson(request):
         entry = get_object_or_404(Accidents, id=marker.accidents.id)
         data.append({'lat': entry.location.coords[1], 'lng': entry.location.coords[0], 'number': marker.accident_number})
 
-    print(data)
-
     return JsonResponse(data, safe=False)
