@@ -32,6 +32,19 @@ DEBUG = "DEVELOPMENT" in os.environ
 
 ALLOWED_HOSTS = []
 
+# GDAL settings
+if "DEVELOPMENT" in os.environ:
+    OSGEO4W = r"C:\OSGeo4W"
+    os.environ["OSGEO4W_ROOT"] = OSGEO4W
+    os.environ["GDAL_DATA"] = os.path.join(
+        BASE_DIR, r".venv\Lib\site-packages\osgeo\data\gdal"
+    )
+    os.environ["PROJ_LIB"] = OSGEO4W + r"\share\proj"
+    os.environ["PATH"] = OSGEO4W + r"\bin;" + os.environ["PATH"]
+    GDAL_LIBRARY_PATH = os.path.join(
+        BASE_DIR, r".venv\Lib\site-packages\osgeo\gdal204.dll"
+    )
+
 
 # Application definition
 
@@ -42,6 +55,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # geodjango requirements
+    "django.contrib.gis",
+    "rest_framework",
+    "rest_framework_gis",
 
     'home',
 ]
