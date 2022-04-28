@@ -99,10 +99,15 @@ WSGI_APPLICATION = 'heatmap.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# connect to postgres db - must activate postgis
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
+        "HOST": "127.0.0.1",
+        "NAME": "accidents",
+        "PASSWORD": os.environ.get("PASSWORD"),
+        "PORT": 5432,
+        "USER": "postgres",
     }
 }
 
